@@ -1,0 +1,7 @@
+<div *ngFor="let user of friends"> 
+  <span>
+    <a routerLink="/conversation/{{user.uid}}">{{user.nick}} - {{user.uid}}</a>
+  </span>
+</div>
+
+<button (click)="logOut()">LogOut</button>
