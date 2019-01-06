@@ -35,7 +35,7 @@ export class UserService {
    * @returns
    * @memberof UserService
    */
-  createCompleteUser(user){
+  createCompleteUser(user) {
     return this.angularFireDatabase.object('/users/' + user.uid).set(user);
   }
 
@@ -46,8 +46,12 @@ export class UserService {
    * @returns
    * @memberof UserService
    */
-  editCompleteUser(user){
+  editCompleteUser(user) {
     return this.angularFireDatabase.object('/users/' + user.uid).set(user);
+  }
+
+  setAvatar(avatar, uid) {
+    return this.angularFireDatabase.object('/users/' + uid + '/avatar').set(avatar);
   }
 
 

@@ -14,6 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { MenuComponent } from './menu/menu.component';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
+import { ImageCropperModule } from 'ngx-image-cropper';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ImageCropperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
