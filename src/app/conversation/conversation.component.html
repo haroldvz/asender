@@ -5,13 +5,23 @@
       <div id="conversationSidebar">
         <div class="vh30">
           <div class="avatarFrameonline">
-            <img src="{{'assets/img/generic_avatar.png'}}" class="avatarImage img-fluid">
+            <div *ngIf="friend; else generic">
+              <img [src]="friend.avatar" class="avatarImage img-fluid">
+            </div>
+            <ng-template #generic>
+             <img [src]="'assets/img/generic_avatar.png'" class="avatarImage img-fluid">
+            </ng-template>
           </div>
         </div>
         <div class="vh30"></div>
         <div class="vh25">
           <div class="avatarFrameonline">
-            <img src="{{'assets/img/generic_avatar.png'}}" class="avatarImage img-fluid">
+            <div *ngIf="user; else generic">
+              <img [src]="user.avatar" class="avatarImage img-fluid">
+            </div>
+            <ng-template #generic>
+             <img [src]="'assets/img/generic_avatar.png'" class="avatarImage img-fluid">
+            </ng-template>
           </div>
         </div>
       </div>
@@ -22,11 +32,29 @@
       <hr />
       <div class="vh55 overscroll pabo10" id="messageArea">
         <div class="messageGroup" *ngFor="let m of conversation">
+        <div *ngIf="m.url; else text">
+          <img [src]="m.url" class="avatarImage img-fluid">
+        </div>
+        <ng-template #text>
           <b>{{getUserNickById(m.sender)}}</b> dice: <br />
           <span>{{m.text}}</span>
+        </ng-template>
+          
         </div>
       </div>
+      <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="1 / 1"
+          [resizeToWidth]="128"
+          format="png"
+          (imageCroppedBase64)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
       <div class="messageControlsContainer">
+      
+      
         <textarea [(ngModel)]="textMessage" (keyup.enter)="sendMessage()" class="form-control" cols="30" rows="5" ></textarea>
         <div id="messageToolBar">
           <div class="item">
@@ -40,10 +68,10 @@
           <div class="item" (click)="sendZumbido()">
             <img src="assets/img/zumbido.png" class="tool">
           </div>
-
+          <a class="btn btn-primary btn-sm marri10" (click)="sendImage()" >Enviar imagen</a>
           <a class="btn btn-primary btn-sm marri10" accept="image/*">Enviar</a>
           <label class="custom-file-upload">
-            <input type="file">
+            <input type="file" (change)="fileChangeEvent($event)" >
             <i name="image"></i> Seleccionar Imagen
           </label>
         </div>
