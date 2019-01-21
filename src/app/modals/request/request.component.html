@@ -4,12 +4,12 @@
       Nueva Solicitud
       <a class="closeButton" (click)="close()">x</a>
     </div>
-    <div class="modal-body" style="height: auto">
+    <div *ngIf="userSender" class="modal-body" style="height: auto">
       <div *ngIf="currentRequest" class="row">
         <div class="col-md-3">
-          <img src="assets/img/generic_avatar.png" class="img-fluid" />
+          <img [src]="userSender.avatar" class="img-fluid" />
         </div>
-        <div *ngIf="userSender" class="col-md-9">
+        <div class="col-md-9">
           <b>{{userSender.subnick}}</b>
           <br>
           <b>{{userSender.email}}</b>
