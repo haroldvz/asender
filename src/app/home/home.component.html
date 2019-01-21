@@ -1,7 +1,69 @@
-<div *ngFor="let user of friends"> 
-  <span>
-    <a routerLink="/conversation/{{user.uid}}">{{user.nick}} - {{user.uid}}</a>
-  </span>
+<div id="homeContainer">
+  <div class="whiteBorderGlassBox">
+    <div class="homeHeadContainer">
+      <div class="row">
+        <div class="col-md-auto">
+          <div class="avatarFrameonline">
+            <img src="assets/img/generic_avatar.png" id="homeAvatarPicture">
+          </div>
+        </div>
+        <div class="col">
+          <b>Eduardo</b>
+          <div>
+            <span>Online</span>
+            <br />
+            <span>< Escribe un mensaje Personal ></span> <br />
+            <a (click)="logout()">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="whiteContainerPadded marto15">
+
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Buscar Amigo" [(ngModel)]="query" />
+      </div>
+      <div class="col-md-auto">
+        <img (click)="open(content)" src="assets/img/logo_live_add.png" class="icon" alt="">
+      </div>
+    </div>
+    <hr />
+    <b *ngIf="user && user.friends">Amigos ({{user.friends.length}} / {{user.friends.length}})</b>
+    <div *ngIf="user && user.friends">
+      <div *ngFor="let f of user.friends">
+
+        {{f}}
+
+      </div>
+      <div class="disblo marbo5">
+        <!-- <app-contact class="col-md-12" *ngFor="let user of user.friends" [uid]="user" ></app-contact> -->
+      </div>
+    </div>
+  </div>
+
+
 </div>
 
-<button (click)="logOut()">LogOut</button>
+ <ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Agregar Amigo</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="">
+      <b>Ingresa el email de tu amigo</b>
+      <input type="email" class="form-control" placeholder="Email" [(ngModel)]="friendEmail" (keyup.enter)="sendRequest()">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="sendRequest()">Guardar</button>
+  </div>
+</ng-template> 
+
+
+

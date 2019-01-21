@@ -15,6 +15,9 @@ import { MenuComponent } from './menu/menu.component';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { RequestComponent } from './modals/request/request.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     HomeComponent,
     ConversationComponent,
     ProfileComponent,
-    MenuComponent
+    MenuComponent,
+    RequestComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +37,12 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFireDatabaseModule,
-    ImageCropperModule
+    ImageCropperModule,
+    NgbModule.forRoot(),// for show modal
+    BootstrapModalModule.forRoot({container: document.body})
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [RequestComponent]// Para que al momento de llamarlo ya este disponible, de lo contrario no lo encuentra bootstrap
 })
 export class AppModule { }
